@@ -90,7 +90,7 @@ var enhance = compose(withPropsOnChange(['node', 'arcGenerator'], function (_ref
         id: node.data.id,
         enableChip: true,
         color: node.data.color,
-        value: "$ ".concat(node.data.value.toFixed(0)),
+        value: "$ ".concat(node.data.value.toFixed(0), " (").concat(node.data.percentage.toFixed(2), " %)"),
         theme: theme,
         format: tooltipFormat,
         renderContent: typeof tooltip === 'function' ? tooltip.bind(null, _objectSpread2({
