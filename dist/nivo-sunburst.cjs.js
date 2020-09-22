@@ -67,7 +67,8 @@ var SunburstArc = function SunburstArc(_ref) {
       borderWidth = _ref.borderWidth,
       borderColor = _ref.borderColor,
       showTooltip = _ref.showTooltip,
-      hideTooltip = _ref.hideTooltip;
+      hideTooltip = _ref.hideTooltip,
+      onClick = _ref.onClick;
   return React.createElement("path", {
     d: path,
     fill: node.data.color,
@@ -75,7 +76,8 @@ var SunburstArc = function SunburstArc(_ref) {
     strokeWidth: borderWidth,
     onMouseEnter: showTooltip,
     onMouseMove: showTooltip,
-    onMouseLeave: hideTooltip
+    onMouseLeave: hideTooltip,
+    onClick: onClick
   });
 };
 var enhance = compose(withPropsOnChange(['node', 'arcGenerator'], function (_ref2) {
@@ -84,19 +86,30 @@ var enhance = compose(withPropsOnChange(['node', 'arcGenerator'], function (_ref
   return {
     path: arcGenerator(node)
   };
-}), withPropsOnChange(['node', 'showTooltip', 'tooltip', 'tooltipFormat', 'theme'], function (_ref3) {
-  var node = _ref3.node,
-      _showTooltip = _ref3.showTooltip,
-      tooltip$1 = _ref3.tooltip,
-      tooltipFormat = _ref3.tooltipFormat,
-      theme = _ref3.theme;
+}), withPropsOnChange(['data', 'color', 'onClick'], function (_ref3) {
+  var data = _ref3.data,
+      color = _ref3.color,
+      _onClick = _ref3.onClick;
+  return {
+    onClick: function onClick(event) {
+      return _onClick(_objectSpread2({
+        color: color
+      }, data), event);
+    }
+  };
+}), withPropsOnChange(['node', 'showTooltip', 'tooltip', 'tooltipFormat', 'theme'], function (_ref4) {
+  var node = _ref4.node,
+      _showTooltip = _ref4.showTooltip,
+      tooltip$1 = _ref4.tooltip,
+      tooltipFormat = _ref4.tooltipFormat,
+      theme = _ref4.theme;
   return {
     showTooltip: function showTooltip(e) {
       _showTooltip( React.createElement(tooltip.BasicTooltip, {
         id: node.data.id,
         enableChip: true,
         color: node.data.color,
-        value: "$ ".concat(node.data.value.toFixed(0)),
+        value: node.data.value,
         theme: theme,
         format: tooltipFormat,
         renderContent: typeof tooltip$1 === 'function' ? tooltip$1.bind(null, _objectSpread2({
@@ -126,7 +139,8 @@ var Sunburst = function Sunburst(_ref) {
       tooltipFormat = _ref.tooltipFormat,
       tooltip = _ref.tooltip,
       theme = _ref.theme,
-      isInteractive = _ref.isInteractive;
+      isInteractive = _ref.isInteractive,
+      onClick = _ref.onClick;
   return React.createElement(core.Container, {
     isInteractive: isInteractive,
     theme: theme,
@@ -154,7 +168,8 @@ var Sunburst = function Sunburst(_ref) {
         hideTooltip: hideTooltip,
         tooltipFormat: tooltipFormat,
         tooltip: tooltip,
-        theme: theme
+        theme: theme,
+        onClick: onClick
       });
     })));
   });
@@ -171,7 +186,8 @@ var SunburstDefaultProps = {
   childColor: {
     from: 'color'
   },
-  isInteractive: true
+  isInteractive: true,
+  onClick: function onClick() {}
 };
 var enhance$1 = compose(defaultProps(SunburstDefaultProps), core.withTheme(), core.withDimensions(), withPropsOnChange(['colors'], function (_ref3) {
   var colors$1 = _ref3.colors;

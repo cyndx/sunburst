@@ -52,6 +52,7 @@ const Sunburst = ({
     theme, // eslint-disable-line react/prop-types
 
     isInteractive,
+    onClick,
 }) => {
     return (
         <Container isInteractive={isInteractive} theme={theme} animate={false}>
@@ -72,6 +73,7 @@ const Sunburst = ({
                                     tooltipFormat={tooltipFormat}
                                     tooltip={tooltip}
                                     theme={theme}
+                                    onClick={onClick}
                                 />
                             ))}
                     </g>
@@ -108,6 +110,7 @@ Sunburst.propTypes = {
     tooltip: PropTypes.func,
 
     isInteractive: PropTypes.bool,
+    onClick: PropTypes.func,
 }
 
 export const SunburstDefaultProps = {
@@ -123,6 +126,7 @@ export const SunburstDefaultProps = {
     childColor: { from: 'color' },
 
     isInteractive: true,
+    onClick: () => {},
 }
 
 const enhance = compose(
