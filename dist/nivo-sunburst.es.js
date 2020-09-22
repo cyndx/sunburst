@@ -87,8 +87,7 @@ var enhance = compose(withPropsOnChange(['node', 'arcGenerator'], function (_ref
   return {
     onClick: function onClick(event) {
       return _onClick(_objectSpread2({
-        color: color,
-        test: 'asdfdsafsdaf'
+        color: color
       }, node.data), event);
     }
   };
