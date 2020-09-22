@@ -13,7 +13,7 @@ import withPropsOnChange from 'recompose/withPropsOnChange'
 import pure from 'recompose/pure'
 import { BasicTooltip } from '@nivo/tooltip'
 
-const SunburstArc = ({ node, path, borderWidth, borderColor, showTooltip, hideTooltip }) => (
+const SunburstArc = ({ node, path, borderWidth, borderColor, showTooltip, hideTooltip, onClick }) => (
     <path
         d={path}
         fill={node.data.color}
@@ -22,6 +22,7 @@ const SunburstArc = ({ node, path, borderWidth, borderColor, showTooltip, hideTo
         onMouseEnter={showTooltip}
         onMouseMove={showTooltip}
         onMouseLeave={hideTooltip}
+        onClick={onClick}
     />
 )
 
@@ -46,6 +47,9 @@ const enhance = compose(
     withPropsOnChange(['node', 'arcGenerator'], ({ node, arcGenerator }) => ({
         path: arcGenerator(node),
     })),
+    withPropsOnChange(['data', 'color', 'onClick'], ({ data, color, onClick }) => ({
+        onClick: event => onClick({ color, ...data }, event),
+    })),
     withPropsOnChange(
         ['node', 'showTooltip', 'tooltip', 'tooltipFormat', 'theme'],
         ({ node, showTooltip, tooltip, tooltipFormat, theme }) => ({
@@ -55,7 +59,7 @@ const enhance = compose(
                         id={node.data.id}
                         enableChip={true}
                         color={node.data.color}
-                        value={`$ ${node.data.value.toFixed(0)}`}
+                        value={node.data.value}
                         theme={theme}
                         format={tooltipFormat}
                         renderContent={
