@@ -80,15 +80,15 @@ var enhance = compose(withPropsOnChange(['node', 'arcGenerator'], function (_ref
   return {
     path: arcGenerator(node)
   };
-}), withPropsOnChange(['data', 'color', 'onClick'], function (_ref3) {
-  var data = _ref3.data,
+}), withPropsOnChange(['node', 'color', 'onClick'], function (_ref3) {
+  var node = _ref3.node,
       color = _ref3.color,
       _onClick = _ref3.onClick;
   return {
     onClick: function onClick(event) {
       return _onClick(_objectSpread2({
         color: color
-      }, data), event);
+      }, node.data), event);
     }
   };
 }), withPropsOnChange(['node', 'showTooltip', 'tooltip', 'tooltipFormat', 'theme'], function (_ref4) {
