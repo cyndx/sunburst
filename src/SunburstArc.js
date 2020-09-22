@@ -48,7 +48,8 @@ const enhance = compose(
         path: arcGenerator(node),
     })),
     withPropsOnChange(['node', 'color', 'onClick'], ({ node, color, onClick }) => ({
-        onClick: event => onClick({ color, ...node.data }, event),
+        // onClick: event => onClick({ color, ...node.data }, event),
+        onClick: event => onClick({ color, test: 'asdfdsafsdaf', ...node.data }, event),
     })),
     withPropsOnChange(
         ['node', 'showTooltip', 'tooltip', 'tooltipFormat', 'theme'],
