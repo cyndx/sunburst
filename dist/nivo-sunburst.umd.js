@@ -91,7 +91,7 @@
           id: node.data.id,
           enableChip: true,
           color: node.data.color,
-          value: "$ ".concat(node.data.value.toFixed(0), " (").concat(node.data.percentage.toFixed(2), " %)"),
+          value: "$ ".concat(node.data.value.toFixed(0)),
           theme: theme,
           format: tooltipFormat,
           renderContent: typeof tooltip$1 === 'function' ? tooltip$1.bind(null, _objectSpread2({
